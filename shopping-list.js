@@ -1,34 +1,40 @@
-const addInput = document.getElementById(add-field);
+const addInput = document.getElementById('add-field');
 
 const colorInput = document.getElementById("color-field");
 const itemList = document.getElementById("item-list");
 
 const listDiv = document.getElementById("list-div"); //for hiding/showing
-const toggle  document.getElementById("toggle-button");
+const toggle = document.getElementById("toggle-button");
 
 // add item
 function addItem() {
-  const lastPickedColor = colorInput.value;
+  if(addInput.value !== ''){
+    const lastPickedColor = colorInput.value;
   const li = document.createElement("li");
   li.innerHTML = addInput.value;
   li.style.color = lastPickedColor;
-  colorChange();
-  itemList.appendChild("li");
-
+  changeColor();
+  itemList.appendChild(li);
   addInput.value = "";
+  }
+  else{
+    alert('write something')
+  }
 }
 
 // remove item
 function removeItem() {
+  let  li = document.querySelector("li:last-child");
   itemList.removeChild(li);
-  let li = document.querySelector("li:last-child");
 }
 
 // change color
+
+
 function changeColor() {
   const List = document.querySelectorAll("li");
   const lastPickedColor = colorInput.value;
-  for (let i = 0; i < List.length() i++) {
+  for (let i = 0; i < List.length; i++) {
     List[i].style.color = lastPickedColor;
   }
 }
@@ -45,7 +51,7 @@ itemList.addEventListener("mouseout", (event) => {
   if (event.target.tagName == "LI") {
     event.target.style.textTransform = "lowercase";
   }
-}));
+});
 
 // hide/show list
 function toggleButton() {
@@ -56,4 +62,4 @@ function toggleButton() {
     listDiv.style.display = "none";
     toggle.textContent = "Show list";
   }
-
+}
